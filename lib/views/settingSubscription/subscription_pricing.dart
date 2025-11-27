@@ -80,41 +80,6 @@ class SubscriptionPricing extends StatelessWidget {
               ),
               SizedBox(height: mediaQuery.height * 0.02),
 
-              // Container(
-              //   height: mediaQuery.height * 0.1,
-              //   width: mediaQuery.width,
-              //   decoration: BoxDecoration(
-              //     color: Color(0xffFFFFFF),
-              //     borderRadius: BorderRadius.circular(10),
-              //     border: Border.all(color: Colors.grey.shade300),
-              //   ),
-              //   child: Padding(
-              //     padding: const EdgeInsets.all(12.0),
-              //     child: Column(
-              //       mainAxisAlignment: MainAxisAlignment.start,
-              //       crossAxisAlignment: CrossAxisAlignment.start,
-              //       children: [
-              //         Text(
-              //           'Free trial',
-              //           style: TextStyle(
-              //             color: Color(0xff644983),
-              //             fontSize: 18,
-              //             fontWeight: FontWeight.w500,
-              //           ),
-              //         ),
-              //         SizedBox(height: mediaQuery.height * 0.001),
-              //         Text(
-              //           'Your free trial contains 30 minutes of AI usage.',
-              //           style: TextStyle(
-              //             color: Color(0xff717375),
-              //             fontSize: 14,
-              //             fontWeight: FontWeight.w400,
-              //           ),
-              //         ),
-              //       ],
-              //     ),
-              //   ),
-              // ),
               Container(
                 height: mediaQuery.height * 0.1, // responsive height
                 width: mediaQuery.width * 0.9, // responsive width
@@ -177,52 +142,59 @@ class SubscriptionPricing extends StatelessWidget {
                 ),
               ),
               SizedBox(height: mediaQuery.height * 0.02),
+
               Container(
-                height: mediaQuery.height * 0.23,
-                width: mediaQuery.width,
+                width: double.infinity,
+                padding: EdgeInsets.symmetric(
+                  horizontal: mediaQuery.width * 0.04,
+                  vertical: mediaQuery.height * 0.02,
+                ),
                 decoration: BoxDecoration(
-                  color: Color(0xffFFFFFF),
+                  color: Colors.white,
                   borderRadius: BorderRadius.circular(10),
                   border: Border.all(color: Colors.grey.shade300),
                 ),
-                child: Padding(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: mediaQuery.width * 0.03,
-                    vertical: mediaQuery.height * 0.01,
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Pay-as-you-go',
-                        style: TextStyle(
-                          color: Color(0xff644983),
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                        ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Pay-as-you-go',
+                      style: TextStyle(
+                        color: Color(0xff644983),
+                        fontSize: mediaQuery.width * 0.055, // responsive
+                        fontWeight: FontWeight.bold,
                       ),
-                      SizedBox(height: mediaQuery.height * 0.01),
-                      Text(
-                        'Buy a bundle of minutes, fully flexible, no commitment!',
-                        style: TextStyle(
-                          color: Color(0xff717375),
-                          fontSize: 15,
-                          fontWeight: FontWeight.w400,
-                        ),
+                    ),
+
+                    SizedBox(height: mediaQuery.height * 0.01),
+
+                    Text(
+                      'Buy a bundle of minutes, fully flexible, no commitment!',
+                      style: TextStyle(
+                        color: Color(0xff717375),
+                        fontSize: mediaQuery.width * 0.04, // responsive
                       ),
-                      SizedBox(height: mediaQuery.height * 0.03),
-                      CustomButton(
+                    ),
+
+                    SizedBox(height: mediaQuery.height * 0.025),
+
+                    SizedBox(
+                      width: double.infinity, // button takes full width
+                      child: CustomButton(
                         onTap: () {
                           Get.to(() => BundleScreen());
                         },
-                        textStyle: TextStyle(fontSize: 18, color: Colors.white),
+                        textStyle: TextStyle(
+                          fontSize: mediaQuery.width * 0.045,
+                          color: Colors.white,
+                        ),
                         name: 'Buy more minutes',
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
+
               SizedBox(height: mediaQuery.height * 0.02),
               Align(
                 alignment: Alignment.centerLeft,
@@ -250,12 +222,12 @@ class SubscriptionPricing extends StatelessWidget {
                 final starterAmount = isMonthly ? "€12 / month" : "€10 / month";
                 final starterSubtitle = isMonthly
                     ? "excl. VAT"
-                    : "excl. VAT, billed monthly";
+                    : "excl. VAT, billed yearly";
 
                 final plusAmount = isMonthly ? "€24 / month" : "€20 / month";
                 final plusSubtitle = isMonthly
                     ? "excl. VAT"
-                    : "excl. VAT, billed monthly";
+                    : "excl. VAT, billed yearly";
 
                 return Column(
                   children: [

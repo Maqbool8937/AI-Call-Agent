@@ -126,68 +126,128 @@ class GenderFilterField1 extends StatefulWidget {
   State<GenderFilterField1> createState() => _GenderFilterFieldState();
 }
 
-class _GenderFilterFieldState extends State<GenderFilterField1> {
+class _GenderFilterFieldState extends State<GenderFilterField1>
+    with WidgetsBindingObserver {
   final GenderFilterController1 controller = Get.put(GenderFilterController1());
 
   final LayerLink _layerLink = LayerLink();
   OverlayEntry? _overlayEntry;
   bool isDropdownOpen = false;
 
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void dispose() {
+    _removeDropdown(); // ensure overlay removed
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  // If app lifecycle changes (e.g. background), remove overlay to be safe
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state != AppLifecycleState.resumed) {
+      _removeDropdown();
+    }
+    super.didChangeAppLifecycleState(state);
+  }
+
   void _toggleDropdown() {
     if (isDropdownOpen) {
-      _overlayEntry?.remove();
-      isDropdownOpen = false;
+      _removeDropdown();
     } else {
-      _overlayEntry = _createOverlay();
-      Overlay.of(context).insert(_overlayEntry!);
-      isDropdownOpen = true;
+      _showDropdown();
     }
   }
 
+  void _showDropdown() {
+    // remove any existing (safety)
+    _removeDropdown();
+
+    _overlayEntry = _createOverlay();
+    Overlay.of(context)?.insert(_overlayEntry!);
+    isDropdownOpen = true;
+  }
+
+  void _removeDropdown() {
+    if (_overlayEntry != null) {
+      try {
+        _overlayEntry!.remove();
+      } catch (_) {}
+      _overlayEntry = null;
+    }
+    isDropdownOpen = false;
+  }
+
   OverlayEntry _createOverlay() {
+    // get size & offset of the widget
     RenderBox renderBox = context.findRenderObject() as RenderBox;
     final size = renderBox.size;
-    final offset = renderBox.localToGlobal(Offset.zero);
 
     return OverlayEntry(
-      builder: (context) => Positioned(
-        left: offset.dx,
-        top: offset.dy + size.height + 5,
-        width: size.width,
-        child: Material(
-          elevation: 4,
-          borderRadius: BorderRadius.circular(10),
-          child: ConstrainedBox(
-            constraints: const BoxConstraints(maxHeight: 250),
-            child: SingleChildScrollView(
-              child: Column(
-                children: controller.genders.map((gender) {
-                  return InkWell(
-                    onTap: () {
-                      controller.changeGender(gender);
-                      _toggleDropdown();
-                    },
-                    child: Container(
-                      width: size.width,
-                      padding: const EdgeInsets.symmetric(
-                        vertical: 15,
-                        horizontal: 15,
-                      ),
-                      child: Text(
-                        gender,
-                        style: const TextStyle(
-                          fontSize: 16,
-                          color: Colors.black87,
-                        ),
-                      ),
-                    ),
-                  );
-                }).toList(),
+      builder: (context) {
+        return Stack(
+          children: [
+            // full-screen detector: tap outside to close (no visual change)
+            Positioned.fill(
+              child: GestureDetector(
+                behavior: HitTestBehavior.translucent,
+                onTap: () {
+                  _removeDropdown();
+                },
               ),
             ),
-          ),
-        ),
-      ),
+
+            // the dropdown positioned under the field, EXACT SAME DESIGN as before
+            Positioned(
+              width: size.width,
+              child: CompositedTransformFollower(
+                link: _layerLink,
+                offset: Offset(0, size.height + 5),
+                showWhenUnlinked: false,
+                child: Material(
+                  elevation: 4,
+                  borderRadius: BorderRadius.circular(10),
+                  child: ConstrainedBox(
+                    constraints: const BoxConstraints(maxHeight: 250),
+                    child: SingleChildScrollView(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: controller.genders.map((gender) {
+                          return InkWell(
+                            onTap: () {
+                              controller.changeGender(gender);
+                              _removeDropdown();
+                            },
+                            child: Container(
+                              width: size.width,
+                              padding: const EdgeInsets.symmetric(
+                                vertical: 15,
+                                horizontal: 15,
+                              ),
+                              child: Text(
+                                gender,
+                                style: const TextStyle(
+                                  fontSize: 16,
+                                  color: Colors.black87,
+                                ),
+                              ),
+                            ),
+                          );
+                        }).toList(),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        );
+      },
     );
   }
 

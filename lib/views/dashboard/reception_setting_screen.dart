@@ -161,7 +161,7 @@ class _ReceptionSettingScreenState extends State<ReceptionSettingScreen> {
                   alignment: Alignment.centerLeft,
                   child: Text(
                     'Greeting message - plays at every start of the call.',
-                    style: TextStyle(color: Color(0xff717375), fontSize: 13),
+                    style: TextStyle(color: Color(0xff717375), fontSize: 14),
                   ),
                 ),
               ),
@@ -225,7 +225,7 @@ class _ReceptionSettingScreenState extends State<ReceptionSettingScreen> {
                   alignment: Alignment.centerLeft,
                   child: Text(
                     'Lorem Ipsum is simply dummy text of the ',
-                    style: TextStyle(color: Color(0xff717375), fontSize: 15),
+                    style: TextStyle(color: Color(0xff717375), fontSize: 14),
                   ),
                 ),
               ),
@@ -253,7 +253,7 @@ class _ReceptionSettingScreenState extends State<ReceptionSettingScreen> {
                   alignment: Alignment.centerLeft,
                   child: Text(
                     'Lorem Ipsum is simply dummy text of the ',
-                    style: TextStyle(color: Color(0xff717375), fontSize: 15),
+                    style: TextStyle(color: Color(0xff717375), fontSize: 14),
                   ),
                 ),
               ),
@@ -280,7 +280,7 @@ class _ReceptionSettingScreenState extends State<ReceptionSettingScreen> {
                   alignment: Alignment.centerLeft,
                   child: Text(
                     'Lorem Ipsum is simply dummy text of the ',
-                    style: TextStyle(color: Color(0xff717375), fontSize: 15),
+                    style: TextStyle(color: Color(0xff717375), fontSize: 14),
                   ),
                 ),
               ),

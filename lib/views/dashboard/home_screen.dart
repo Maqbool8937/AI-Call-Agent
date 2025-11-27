@@ -295,7 +295,7 @@ class _HomeScreenState extends State<HomeScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'In order to forward calls to your AI assistant, you need to complete the following process:”',
+                  'In order to forward calls to your AI assistant, you need to complete the following process:',
                   style: TextStyle(
                     color: Color(0xff5A5A5A),
                     fontSize: 12,

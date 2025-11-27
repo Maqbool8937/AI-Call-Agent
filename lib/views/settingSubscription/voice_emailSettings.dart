@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hasnain_project/controllers/getx_controller/coutry_dropdown_controller.dart';
-import 'package:hasnain_project/views/settingSubscription/priority_blocked_screen.dart';
+import 'package:hasnain_project/views/settingSubscription/blocked_screen.dart';
+import 'package:hasnain_project/views/settingSubscription/priority_screen.dart';
 import 'package:hasnain_project/views/widgets/country_dropdown_field.dart';
 import 'package:hasnain_project/views/widgets/custom_button.dart';
 import 'package:hasnain_project/views/widgets/custom_field.dart';
@@ -146,7 +147,7 @@ class _VoiceEmailsettingsState extends State<VoiceEmailsettings> {
                   alignment: Alignment.centerLeft,
                   child: Text(
                     'Lorem Ipsum is simply dummy text of the ',
-                    style: TextStyle(color: Color(0xff717375), fontSize: 15),
+                    style: TextStyle(color: Color(0xff717375), fontSize: 14),
                   ),
                 ),
               ),
@@ -175,7 +176,7 @@ class _VoiceEmailsettingsState extends State<VoiceEmailsettings> {
                   alignment: Alignment.centerLeft,
                   child: Text(
                     'Lorem Ipsum is simply dummy text of the ',
-                    style: TextStyle(color: Color(0xff717375), fontSize: 15),
+                    style: TextStyle(color: Color(0xff717375), fontSize: 14),
                   ),
                 ),
               ),
@@ -203,7 +204,7 @@ class _VoiceEmailsettingsState extends State<VoiceEmailsettings> {
                   alignment: Alignment.centerLeft,
                   child: Text(
                     'Lorem Ipsum is simply dummy text of the ',
-                    style: TextStyle(color: Color(0xff717375), fontSize: 15),
+                    style: TextStyle(color: Color(0xff717375), fontSize: 14),
                   ),
                 ),
               ),
@@ -251,7 +252,7 @@ class _VoiceEmailsettingsState extends State<VoiceEmailsettings> {
               SizedBox(height: mediaQuery.height * 0.01),
               GestureDetector(
                 onTap: () {
-                  Get.to(() => PriorityBlockedScreen());
+                  Get.to(() => PriorityScreen());
                 },
                 child: EditableTextField(
                   controller: phoneController,
@@ -275,7 +276,7 @@ class _VoiceEmailsettingsState extends State<VoiceEmailsettings> {
               SizedBox(height: mediaQuery.height * 0.01),
               GestureDetector(
                 onTap: () {
-                  Get.to(() => PriorityBlockedScreen());
+                  Get.to(() => BlockedScreen());
                 },
                 child: EditableTextField(
                   controller: subscriptionController,

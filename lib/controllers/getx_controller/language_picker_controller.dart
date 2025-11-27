@@ -11,7 +11,7 @@ class LanguagePickerController extends GetxController {
     "Spanish",
   ];
 
-  void changeLanguage(String lang) {
+  void changeLanguage(String lang) { 
     selectedLanguage.value = lang;
   }
 }

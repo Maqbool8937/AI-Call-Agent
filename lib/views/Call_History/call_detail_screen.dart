@@ -82,10 +82,18 @@ class _BundleScreenState extends State<CallDetailScreen> {
                 ),
               ),
               SizedBox(height: mediaQuery.height * 0.01),
+              // CustomTextField(
+              //   controller: callstartController,
+              //   hintText: '11/08/2024 11:15',
+              //   readOnly: true,
+              // ),
               CustomTextField(
                 controller: callstartController,
-                hintText: '11/08/2024 11:15',
+                hintText: "11/08/2024 11:15",
+                readOnly: true,
+                // disables typing, focus, selection
               ),
+
               // Container(
               //   height: mediaQuery.height * 0.07,
               //   width: mediaQuery.width,
@@ -116,6 +124,8 @@ class _BundleScreenState extends State<CallDetailScreen> {
               CustomTextField(
                 controller: callendController,
                 hintText: '11/08/2024 11:15',
+                readOnly: true,
+                //  readOnly: true,
               ),
               // Container(
               //   height: mediaQuery.height * 0.07,
@@ -178,6 +188,7 @@ class _BundleScreenState extends State<CallDetailScreen> {
                       decoration: TextDecoration.underline,
                       decorationColor: Color(0xff717375),
                       color: Color(0xff717375),
+                      fontWeight: FontWeight.w500,
                     ),
                   ),
                 ),
@@ -221,6 +232,7 @@ class _BundleScreenState extends State<CallDetailScreen> {
                     fontSize: 15,
                     color: Color(0xff717375),
                     height: 1.5,
+                    fontWeight: FontWeight.w500,
                   ),
                 ),
               ),
@@ -271,6 +283,8 @@ class _BundleScreenState extends State<CallDetailScreen> {
               CustomTextField(
                 controller: calldureationController,
                 hintText: '03:35',
+                readOnly: true,
+                // readOnly: true,
               ),
 
               SizedBox(height: mediaQuery.height * 0.03),
@@ -289,6 +303,8 @@ class _BundleScreenState extends State<CallDetailScreen> {
               CustomTextField(
                 controller: miutesController,
                 hintText: '4 minutes',
+                readOnly: true,
+                //readOnly: true,
               ),
 
               SizedBox(height: mediaQuery.height * 0.03),
@@ -304,7 +320,11 @@ class _BundleScreenState extends State<CallDetailScreen> {
                 ),
               ),
               SizedBox(height: mediaQuery.height * 0.01),
-              CustomTextField(controller: actionsController, hintText: 'N/A'),
+              CustomTextField(
+                controller: actionsController,
+                hintText: 'N/A',
+                readOnly: true,
+              ),
 
               SizedBox(height: mediaQuery.height * 0.04),
             ],

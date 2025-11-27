@@ -1,30 +1,48 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:hasnain_project/views/widgets/country_dropdown_field.dart';
 
-class SystemDropdownField extends StatefulWidget {
-  SystemDropdownField({super.key});
+class SystemDropdown1Field extends StatefulWidget {
+  SystemDropdown1Field({super.key});
 
   @override
-  State<SystemDropdownField> createState() => _GenderFilterFieldState();
+  State<SystemDropdown1Field> createState() => _SystemDropdown1FieldState();
 }
 
-class _GenderFilterFieldState extends State<SystemDropdownField> {
-  final GenderFilterController1 controller = Get.put(GenderFilterController1());
+class _SystemDropdown1FieldState extends State<SystemDropdown1Field> {
+  final SystemDropdown1Controller controller = Get.put(
+    SystemDropdown1Controller(),
+  );
 
   final LayerLink _layerLink = LayerLink();
   OverlayEntry? _overlayEntry;
   bool isDropdownOpen = false;
 
+  @override
+  void dispose() {
+    _removeDropdown();
+    super.dispose();
+  }
+
   void _toggleDropdown() {
     if (isDropdownOpen) {
-      _overlayEntry?.remove();
-      isDropdownOpen = false;
+      _removeDropdown();
     } else {
-      _overlayEntry = _createOverlay();
-      Overlay.of(context).insert(_overlayEntry!);
-      isDropdownOpen = true;
+      _showDropdown();
     }
+  }
+
+  void _showDropdown() {
+    _overlayEntry = _createOverlay();
+    Overlay.of(context).insert(_overlayEntry!);
+    isDropdownOpen = true;
+  }
+
+  void _removeDropdown() {
+    if (_overlayEntry != null) {
+      _overlayEntry?.remove();
+      _overlayEntry = null;
+    }
+    isDropdownOpen = false;
   }
 
   OverlayEntry _createOverlay() {
@@ -33,43 +51,55 @@ class _GenderFilterFieldState extends State<SystemDropdownField> {
     final offset = renderBox.localToGlobal(Offset.zero);
 
     return OverlayEntry(
-      builder: (context) => Positioned(
-        left: offset.dx,
-        top: offset.dy + size.height + 5,
-        width: size.width,
-        child: Material(
-          elevation: 4,
-          borderRadius: BorderRadius.circular(10),
-          child: ConstrainedBox(
-            constraints: const BoxConstraints(maxHeight: 250),
-            child: SingleChildScrollView(
-              child: Column(
-                children: controller.genders.map((gender) {
-                  return InkWell(
-                    onTap: () {
-                      controller.changeGender(gender);
-                      _toggleDropdown();
-                    },
-                    child: Container(
-                      width: size.width,
-                      padding: const EdgeInsets.symmetric(
-                        vertical: 15,
-                        horizontal: 15,
-                      ),
-                      child: Text(
-                        gender,
-                        style: const TextStyle(
-                          fontSize: 16,
-                          color: Colors.black87,
+      builder: (context) => Stack(
+        children: [
+          // ***** closes dropdown when tapping outside *****
+          Positioned.fill(
+            child: GestureDetector(
+              onTap: _removeDropdown,
+              behavior: HitTestBehavior.translucent,
+            ),
+          ),
+
+          Positioned(
+            left: offset.dx,
+            top: offset.dy + size.height + 5,
+            width: size.width,
+            child: Material(
+              elevation: 4,
+              borderRadius: BorderRadius.circular(10),
+              child: ConstrainedBox(
+                constraints: const BoxConstraints(maxHeight: 250),
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: controller.genders.map((item) {
+                      return InkWell(
+                        onTap: () {
+                          controller.changeGender(item);
+                          _removeDropdown();
+                        },
+                        child: Container(
+                          width: size.width,
+                          padding: const EdgeInsets.symmetric(
+                            vertical: 15,
+                            horizontal: 15,
+                          ),
+                          child: Text(
+                            item,
+                            style: const TextStyle(
+                              fontSize: 16,
+                              color: Colors.black87,
+                            ),
+                          ),
                         ),
-                      ),
-                    ),
-                  );
-                }).toList(),
+                      );
+                    }).toList(),
+                  ),
+                ),
               ),
             ),
           ),
-        ),
+        ],
       ),
     );
   }
@@ -108,12 +138,12 @@ class _GenderFilterFieldState extends State<SystemDropdownField> {
   }
 }
 
-class SystemDropdownController extends GetxController {
+class SystemDropdown1Controller extends GetxController {
   var selectedGender = "Select Theme".obs;
 
   final List<String> genders = ["Light Mode", "Dark Mode"];
 
-  void changeGender(String gender) {
-    selectedGender.value = gender;
+  void changeGender(String value) {
+    selectedGender.value = value;
   }
 }

@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hasnain_project/views/widgets/custom_button.dart';
 
-class PriorityBlockedScreen extends StatefulWidget {
-  const PriorityBlockedScreen({super.key});
+class BlockedScreen extends StatefulWidget {
+  const BlockedScreen({super.key});
 
   @override
-  State<PriorityBlockedScreen> createState() => _BundleScreenState();
+  State<BlockedScreen> createState() => _BundleScreenState();
 }
 
-class _BundleScreenState extends State<PriorityBlockedScreen> {
+class _BundleScreenState extends State<BlockedScreen> {
   @override
   Widget build(BuildContext context) {
     final mediaQuery = MediaQuery.of(context).size;
@@ -54,15 +54,16 @@ class _BundleScreenState extends State<PriorityBlockedScreen> {
                   ),
                   SizedBox(width: mediaQuery.width * 0.06),
                   Text(
-                    'Priority',
+                    'Blocked',
                     style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
                   ),
                 ],
               ),
               SizedBox(height: mediaQuery.height * 0.04),
               Text(
-                "Calls from these numbers will  be transferred straight from the AI assistant to your phone.",
-                style: TextStyle(color: Color(0xff717375), fontSize: 16),
+                textAlign: TextAlign.start,
+                "Calls from these numbers will be automatically blocked and will not reach you.",
+                style: TextStyle(color: Color(0xff717375), fontSize: 15),
               ),
 
               SizedBox(height: mediaQuery.height * 0.04),
@@ -230,7 +231,7 @@ class _BundleScreenState extends State<PriorityBlockedScreen> {
                           //Get.to(() => PrBlockedScreen());
                         },
                         width: mediaQuery.width * 0.85,
-                        name: 'Add new priority number',
+                        name: 'Add new blocked number',
                       ),
                     ],
                   ),
